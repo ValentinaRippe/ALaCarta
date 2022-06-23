@@ -1,0 +1,6 @@
+@import "../../../../../styles.scss";
+.formLogin{
+  @include flex();
+  min-height: calc(100vh - 60px);
+  max-width: 100vw;
+}
