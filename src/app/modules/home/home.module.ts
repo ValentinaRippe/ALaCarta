@@ -2,16 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './page/home.component';
+import { HeroComponent } from './components/hero/hero.component';
+import { ListRecipesComponent } from './components/list-recipes/list-recipes.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MenuBagComponent } from './components/menu-bag/menu-bag.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    HeroComponent,
+    ListRecipesComponent,
+    MenuBagComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    SharedModule
   ]
 })
 export class HomeModule { }

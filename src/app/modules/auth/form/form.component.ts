@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ACTIONS } from 'src/app/shared/const/const';
-import { AuthService } from '../service/auth.service';
+import { ACTIONS } from 'src/app/core/const/const';
+import { AuthService } from '../../../core/service/auth/auth.service';
 
 export interface OptionsForm {
   id: string;
@@ -17,26 +16,33 @@ export interface OptionsForm {
 export class FormComponent implements OnInit {
   authForm!: FormGroup;
   signIn = ACTIONS.signIn
+  signUp = ACTIONS.signUp
   @Input() options!: OptionsForm;
 
-  constructor(private readonly fb: FormBuilder, private authSvc: AuthService, private router: Router) { }
+  constructor(private readonly fb: FormBuilder, private authSvc: AuthService) { }
 
   ngOnInit(): void {
     this.initForm();
   }
-  async onSubmit(){
-    this.authSvc.signIn(this.authForm.value).subscribe(res=>{
-      if(res){
-        this.router.navigate(['/home'])
-      }
-    })
+
+  onSubmit() {
+    this.authSvc.signIn(this.authForm.value).subscribe()
   }
 
-  private initForm():void{
-    this.authForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    })
+
+  private initForm(): void {
+    if (this.signIn === this.options.id) {
+      this.authForm = this.fb.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+      })
+    } else {
+      this.authForm = this.fb.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        password_again: ['', Validators.required]
+      })
+    }
   }
 
 }

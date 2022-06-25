@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 @mixin flex {
   display: flex;
   align-items: center;
@@ -7,4 +11,5 @@
 body{
   background-image: linear-gradient(to right top, #d1cac2, #d7d2ca, #ddd9d2, #e4e1db, #eae8e3, #eae8e3, #eae8e3, #eae8e3, #e4e1db, #ddd9d2, #d7d2ca, #d1cac2);
   min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }

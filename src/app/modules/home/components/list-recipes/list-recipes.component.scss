@@ -1,0 +1,5 @@
+@import '../../../../../styles.scss';
+.contCards{
+  @include flex();
+  flex-wrap: wrap;
+}

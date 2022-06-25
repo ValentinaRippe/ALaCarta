@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   urlAuth:'http://challenge-react.alkemy.org/',
-  api: ''
+  api: 'https://api.spoonacular.com/recipes/',
+  apiKey: '&apiKey=0ec5d2ba7b7a4f43acfd91677a011926',
+  apiProv: 'https://api.edamam.com/api/recipes/v2?',
+  app_id: '&app_id=d946d1c2',
+  app_key: '&app_key=84bc89da0d3214bbd32ed1620930c7cf'
 };
 
 /*
