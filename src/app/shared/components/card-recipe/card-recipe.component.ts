@@ -8,7 +8,7 @@ import { RecipeCrdProv, RecipeRes } from '../../models/recipe.model';
   styleUrls: ['./card-recipe.component.scss']
 })
 export class CardRecipeComponent implements OnInit {
-  storedRecipe: string[] = []
+  storedRecipe: string[] = JSON.parse(localStorage.getItem('storedRecipe')!)
   recipe: RecipeCrdProv = {
     uri: '',
     label: '',
@@ -19,20 +19,21 @@ export class CardRecipeComponent implements OnInit {
   @Input() recipeRes: RecipeRes = {
     recipe: this.recipe
   }
-  constructor() { }
+  constructor(private recipeSrv: RecipesService) { }
 
   ngOnInit(): void {
     localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
   }
 
   recipeSaved(id: string) {
-    this.storedRecipe = JSON.parse(localStorage.getItem('storedRecipe')!)
     if(this.storedRecipe.includes(id)) {
       this.storedRecipe.splice(this.storedRecipe.indexOf(id), 1)
     } else {
+      this.recipeSrv.savedRecipe.subscribe(res=> console.log(res))
       this.storedRecipe.push(id)
     }
     localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
+
     console.log(JSON.parse(localStorage.getItem('storedRecipe')!))
   }
 
