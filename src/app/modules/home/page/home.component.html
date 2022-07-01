@@ -1,9 +1,18 @@
-<div>
-  <div>
-    <app-hero></app-hero>
-  </div>
-  <div class="flex">
-    <app-list-recipes [recipes] ='recipes'></app-list-recipes>
-    <app-menu-bag></app-menu-bag>
+<div class=" flex items-center justify-center flex-col">
+  <div class="flex ">
+    <div class="contRecipes">
+      <div class="hero">
+        <app-hero (search)="onSearch($event)"></app-hero>
+      </div>
+      <div>
+        <mat-icon class="px-6" (click)="next()">arrow_back_ios</mat-icon>
+        <mat-icon class="px-6" (click)="next()">arrow_forward_ios</mat-icon>
+      </div>
+      <app-list-recipes [load]="load" [recipes]='recipes' (storedRecipe)="storedRecipe($event)"></app-list-recipes>
+    </div>
+    <div class="menuBag">
+      <h1>MenuBag</h1>
+      <app-menu-bag  [recipes]='recipesSaved'></app-menu-bag>
+    </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { DetailRecipeComponent } from './modules/detail-recipe/detail-recipe.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DetailRecipeComponent } from './modules/detail-recipe/detail-recipe.com
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

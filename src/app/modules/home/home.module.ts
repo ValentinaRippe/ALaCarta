@@ -7,6 +7,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ListRecipesComponent } from './components/list-recipes/list-recipes.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MenuBagComponent } from './components/menu-bag/menu-bag.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import { MenuBagComponent } from './components/menu-bag/menu-bag.component';
     HomeComponent,
     HeroComponent,
     ListRecipesComponent,
-    MenuBagComponent
+    MenuBagComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    MatIconModule
   ]
 })
 export class HomeModule { }

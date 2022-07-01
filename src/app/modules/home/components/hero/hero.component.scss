@@ -1,0 +1,17 @@
+.h {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.imgHero {
+  transform: rotate(45deg);
+  width: 250px;
+  margin-bottom: -3rem;
+}
+@media (max-width:748px) {
+  .h{
+    flex-direction: column;
+  }
+}

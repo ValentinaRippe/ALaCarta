@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { RecipesService } from 'src/app/core/service/recipes/recipes.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { RecipeCrdProv, RecipeRes } from '../../models/recipe.model';
 
 @Component({
   selector: 'app-card-recipe',
   templateUrl: './card-recipe.component.html',
-  styleUrls: ['./card-recipe.component.scss']
+  styleUrls: ['./card-recipe.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardRecipeComponent implements OnInit {
-  storedRecipe: string[] = JSON.parse(localStorage.getItem('storedRecipe')!)
+export class CardRecipeComponent implements OnInit{
+  storedRecipe: string[] = JSON.parse(localStorage.getItem('storedRecipe')!) || []
   recipe: RecipeCrdProv = {
     uri: '',
     label: '',
@@ -19,22 +19,26 @@ export class CardRecipeComponent implements OnInit {
   @Input() recipeRes: RecipeRes = {
     recipe: this.recipe
   }
-  constructor(private recipeSrv: RecipesService) { }
+  @Output() savedRecipe = new EventEmitter<string[]>()
+  constructor() {}
 
   ngOnInit(): void {
-    localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
+    if(localStorage.getItem('storedRecipe') === undefined){
+      localStorage.setItem('storedRecipe', '[]')
+    }else{
+      localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
+    }
   }
 
   recipeSaved(id: string) {
-    if(this.storedRecipe.includes(id)) {
-      this.storedRecipe.splice(this.storedRecipe.indexOf(id), 1)
-    } else {
-      this.recipeSrv.savedRecipe.subscribe(res=> console.log(res))
-      this.storedRecipe.push(id)
+      this.storedRecipe = JSON.parse(localStorage.getItem('storedRecipe')!)
+      if(this.storedRecipe.includes(id)) {
+        this.storedRecipe.splice(this.storedRecipe.indexOf(id), 1)
+      } else {
+        this.storedRecipe.push(id)
+      }
+      localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
+      this.savedRecipe.emit(JSON.parse(localStorage.getItem('storedRecipe')!))
     }
-    localStorage.setItem('storedRecipe', JSON.stringify(this.storedRecipe))
-
-    console.log(JSON.parse(localStorage.getItem('storedRecipe')!))
-  }
 
 }

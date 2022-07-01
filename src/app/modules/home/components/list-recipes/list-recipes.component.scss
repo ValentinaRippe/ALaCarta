@@ -1,5 +1,9 @@
 @import '../../../../../styles.scss';
+.list{
+  width: 100%;
+}
 .contCards{
   @include flex();
   flex-wrap: wrap;
+  width: 90%;
 }

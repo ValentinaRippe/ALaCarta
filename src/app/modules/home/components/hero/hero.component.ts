@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { RecipeRes } from 'src/app/shared/models/recipe.model';
 
 @Component({
   selector: 'app-hero',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent implements OnInit {
+  searchEmit!: RecipeRes[]
+  @Output() search = new EventEmitter<RecipeRes[]>();
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
+  onSearch(search: RecipeRes[]) {
+    this.search.emit(search);
+  }
+
 
 }

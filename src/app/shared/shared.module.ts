@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../core/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { CardRecipeComponent } from './components/card-recipe/card-recipe.component';
 import {MatIconModule} from '@angular/material/icon';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent,
-    CardRecipeComponent
+    CardRecipeComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
-    NavbarComponent,
-    CardRecipeComponent
+    CardRecipeComponent,
+    SearchComponent
   ]
 })
 export class SharedModule { }
