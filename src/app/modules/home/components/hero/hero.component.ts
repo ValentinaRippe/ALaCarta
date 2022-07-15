@@ -8,7 +8,7 @@ import { RecipeRes } from 'src/app/shared/models/recipe.model';
 })
 export class HeroComponent implements OnInit {
   searchEmit!: RecipeRes[]
-  @Output() search = new EventEmitter<RecipeRes[]>();
+  @Output() search = new EventEmitter<string>();
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class HeroComponent implements OnInit {
 
   }
 
-  onSearch(search: RecipeRes[]) {
+  onSearch(search: string) {
     this.search.emit(search);
   }
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -26,10 +27,10 @@ export class RecipesService {
     },
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
-  getRecipes(query: string = 'ab') {
+  getRecipes(query: string = 'all') {
     return this.http
       .get(this.api + `?type=public&q=${query}` + this.appId + this.appKey)
       .pipe(
@@ -41,7 +42,7 @@ export class RecipesService {
         })
       )
   }
-  getRecipesPage(url:string){
+  getRecipesPage(url:string | any){
     return this.http.get(url)
     .pipe(
       catchError(() => {
@@ -63,7 +64,13 @@ export class RecipesService {
             text: 'You may not make more than 10 requests per minute',
             timer: 3000,
             timerProgressBar: true,
-          })
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setTimeout(() => {
+                window.location.reload()
+              }, 3000);
+            }
+          });
         })
       )
   }

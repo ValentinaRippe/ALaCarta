@@ -15,3 +15,15 @@ export interface RecipeCrdProv {
 export interface RecipeRes {
   recipe: RecipeCrdProv
 }
+
+export interface RecipePages {
+  hits: RecipeRes[],
+  _links: {
+    next: {
+      href: string
+    },
+    self: {
+      href: string
+    }
+  }
+}

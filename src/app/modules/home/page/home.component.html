@@ -4,9 +4,9 @@
       <div class="hero">
         <app-hero (search)="onSearch($event)"></app-hero>
       </div>
-      <div>
-        <mat-icon class="px-6" (click)="next()">arrow_back_ios</mat-icon>
-        <mat-icon class="px-6" (click)="next()">arrow_forward_ios</mat-icon>
+      <div class="flex justify-center items-center mb-4">
+        <mat-icon *ngIf="currentPage > 0" class="px-6 cursor-pointer hover:text-blue-800" (click)="prev()">arrow_back_ios</mat-icon>
+        <mat-icon *ngIf="recipesData.hits" class="px-6 cursor-pointer hover:text-blue-800" (click)="next()">arrow_forward_ios</mat-icon>
       </div>
       <app-list-recipes [load]="load" [recipes]='recipes' (storedRecipe)="storedRecipe($event)"></app-list-recipes>
     </div>
@@ -16,3 +16,4 @@
     </div>
   </div>
 </div>
+

@@ -1,8 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { debounce, debounceTime, Subject } from 'rxjs';
-import { RecipesService } from 'src/app/core/service/recipes/recipes.service';
-import { RecipeRes } from '../../models/recipe.model';
+import { debounce, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +8,9 @@ import { RecipeRes } from '../../models/recipe.model';
 })
 export class SearchComponent implements OnInit {
   searchKeyup = new Subject<any>();
-  @Output() search = new EventEmitter<RecipeRes[]>();
+  @Output() search = new EventEmitter<string>();
 
-  constructor( private recipeSvc: RecipesService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.searchKeyup.pipe(debounce(i=>i.length>2?i:'')).subscribe((search: string) => {
@@ -29,12 +26,6 @@ export class SearchComponent implements OnInit {
   }
 
   getRecipes(search: string) {
-    this.recipeSvc.getRecipes(search)
-      .subscribe((res: any) => {
-        console.log(res, 'search')
-        this.search.emit(res.hits)
-      }), (err: any) => {
-        console.log(err)
-      }
+    this.search.emit(search)
   }
 }
